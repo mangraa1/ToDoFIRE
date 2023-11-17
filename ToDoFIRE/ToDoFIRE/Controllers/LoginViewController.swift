@@ -9,6 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    //TODO: - Проблема с аутлетом в LoginVC, скорее всего нужно пересоздать. Когда ставишь InitialVC на navController, проблема уходит  tasksSegue
+
     //MARK: - @IBOutlets
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
