@@ -9,8 +9,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    //TODO: - Проблема с аутлетом в LoginVC, скорее всего нужно пересоздать. Когда ставишь InitialVC на navController, проблема уходит  tasksSegue
-
     //MARK: - @IBOutlets
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
@@ -19,7 +17,22 @@ class LoginViewController: UIViewController {
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        NotificationCenter.default.addObserver(self, selector: #selector(kbDidShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(kbDidHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    //MARK: - NotificationCenter
+    @objc private func kbDidShow(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let kbFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+
+        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height + kbFrameSize.height)
+        (self.view as! UIScrollView).scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrameSize.height, right: 0)
+    }
+
+    @objc private func kbDidHide() {
+        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
     }
 
     //MARK: - @IBActions
@@ -27,6 +40,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func registerTapped(_ sender: Any) {
+    }
+
+    //MARK: - Deinit
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
