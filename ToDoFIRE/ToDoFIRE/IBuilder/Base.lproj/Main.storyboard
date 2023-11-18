@@ -12,11 +12,11 @@
             <objects>
                 <viewController id="pm0-Xw-JS6" customClass="TasksViewController" customModule="ToDoFIRE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iMF-de-qIs">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7A2-Ni-xog">
-                                <rect key="frame" x="0.0" y="56" width="393" height="786"/>
+                                <rect key="frame" x="0.0" y="44" width="393" height="808"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.78431367870000002" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -47,6 +47,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tasks" id="a9g-xp-rZd">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="lyW-ft-t3b">
+                            <connections>
+                                <action selector="signOutTapped:" destination="pm0-Xw-JS6" id="nnC-aK-2VE"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8g8-Fc-EV7">
                             <connections>
                                 <action selector="addTapped:" destination="pm0-Xw-JS6" id="IcI-3m-5sb"/>
@@ -68,7 +73,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="cbI-jj-9hn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jMw-GV-JAM">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -145,7 +150,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="loginTapped:" destination="1Zz-Ys-eIt" eventType="touchUpInside" id="Gg8-UY-nxX"/>
-                                                    <segue destination="Chu-IS-baK" kind="show" identifier="tasksSegue" id="u7Y-J5-pk1"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MR3-wB-XjO">
@@ -189,6 +193,7 @@
                         <outlet property="emailTextField" destination="BbW-LC-EiN" id="E5A-Sg-d1p"/>
                         <outlet property="passwordTextField" destination="yBu-Ii-9RN" id="hVE-uI-k2x"/>
                         <outlet property="warningLabel" destination="ffB-9y-Ciy" id="43e-4S-5H3"/>
+                        <segue destination="Chu-IS-baK" kind="presentation" identifier="tasksSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="DwF-Hy-xA2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="URJ-HK-tgq" sceneMemberID="firstResponder"/>
