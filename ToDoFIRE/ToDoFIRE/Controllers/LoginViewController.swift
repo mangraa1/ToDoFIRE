@@ -82,8 +82,6 @@ class LoginViewController: UIViewController {
 
             if user != nil {
                 self?.performSegue(withIdentifier: (self?.tasksSegueIdentifier)!, sender: nil)
-//                self?.emailTextField.text = ""
-//                self?.passwordTextField.text = ""
             }
 
             self?.displayWarningLabel(with: "No such user")
