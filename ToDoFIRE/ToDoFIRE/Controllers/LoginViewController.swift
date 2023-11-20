@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
 
     //MARK: - Internal variables
     private let tasksSegueIdentifier = "tasksSegue"
+    private var ref: DatabaseReference!
 
     //MARK: - @IBOutlets
     @IBOutlet weak var warningLabel: UILabel!
@@ -31,6 +32,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         warningLabel.alpha = 0
+
+        ref = Database.database().reference(withPath: "users")
 
         Auth.auth().addStateDidChangeListener { [weak self] auth, user in
             if user != nil {
@@ -96,16 +99,15 @@ class LoginViewController: UIViewController {
 
         // Firebase create user
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] user, error in
-            if let error = error {
-                print("Error: ", error.localizedDescription)
-                self?.displayWarningLabel(with: "User is not created")
-            }
 
-            guard let _ = user else {
-                print("Error: User is nil")
+            guard error == nil, user != nil else {
+                print("Error: ", error!.localizedDescription)
                 self?.displayWarningLabel(with: "User is not created")
                 return
             }
+
+            let userRef = self?.ref.child((user?.user.uid)!)
+            userRef?.setValue(["email": user?.user.email])
         }
     }
 
