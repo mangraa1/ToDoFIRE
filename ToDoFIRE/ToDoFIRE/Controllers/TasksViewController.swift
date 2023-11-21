@@ -19,6 +19,22 @@ class TasksViewController: UIViewController, UITableViewDelegate,  UITableViewDa
     @IBOutlet weak var tableView: UITableView!
 
     //MARK: - Life Cycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        ref.observe(.value) { [weak self] dataSnapshot in
+            var _tasks = Array<TaskModel>()
+
+            for item in dataSnapshot.children {
+                let task = TaskModel(snapshot: item as! DataSnapshot)
+                _tasks.append(task)
+            }
+
+            self?.tasks = _tasks
+            self?.tableView.reloadData()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,18 +43,30 @@ class TasksViewController: UIViewController, UITableViewDelegate,  UITableViewDa
         ref = Database.database().reference().child("users").child(String(user.uid)).child("tasks")
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        ref.removeAllObservers()
+    }
+
     //MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        cell.textLabel?.text = "This is cell number \(indexPath.row)"
+        let taskTitile = tasks[indexPath.row].title
+
+        cell.textLabel?.text = taskTitile
         cell.textLabel?.textColor = .white
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 
     //MARK: - @IBActions
