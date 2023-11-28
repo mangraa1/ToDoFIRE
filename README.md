@@ -1,4 +1,5 @@
-# ToDoFIRE
+# ToDoFIRE   <img src="https://github.com/mangraa1/Weather-Hunt/assets/115303225/bb6d4460-556a-4eec-b3f3-fc0282216d9d" width="25" height="25">
+
 
 
 ### UIKit user task list app for iOS/iPadOS
@@ -25,7 +26,8 @@ git clone https://github.com/mangraa1/ToDoFIRE
 
 | User registration screen |
 | ------------- |
-|![Simulator Screenshot - iPhone 15 Pro - 2023-11-25 at 16 14 28](https://github.com/mangraa1/ToDoFIRE/assets/115303225/4bbabb29-51d9-4a14-8338-7f3ef50700e6)|
+|<img src="https://github.com/mangraa1/ToDoFIRE/assets/115303225/4bbabb29-51d9-4a14-8338-7f3ef50700e6" width="490" height="1000">|
+
 
 
 ### Log in to your account or register a new one
