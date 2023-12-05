@@ -41,6 +41,9 @@ class LoginViewController: UIViewController {
             }
         }
 
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+
         NotificationCenter.default.addObserver(self, selector: #selector(kbDidShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(kbDidHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -117,3 +120,16 @@ class LoginViewController: UIViewController {
     }
 }
 
+//MARK: - UITextFieldDelegate
+extension LoginViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            passwordTextField.resignFirstResponder()
+        }
+
+        return true
+    }
+}
